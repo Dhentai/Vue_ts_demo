@@ -5,6 +5,7 @@
     <!--<p>computed msg: {{ computedMsg }}</p>-->
     <!--<button @click="greet">Greet</button>-->
     {{ decLiteral }}
+    123
   </div>
 </template>
 

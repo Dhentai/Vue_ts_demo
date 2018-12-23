@@ -72,7 +72,11 @@ var App = /** @class */ (function (_super) {
         // notSure = false; // okay, definitely a boolean
         notSure.ifItExists = function () { return console.log(1); }; // okay, ifItExists might exist at runtime
         notSure.ifItExists(); // okay, toFixed exists (but the compiler doesn't check)
-        console.log(notSure);
+        function keepWholeObject(wholeObject) {
+            var a = wholeObject.a, _a = wholeObject.b, b = _a === void 0 ? 1001 : _a;
+            debugger;
+        }
+        keepWholeObject({ a: 'cmn' });
     };
     App = __decorate([
         Component
