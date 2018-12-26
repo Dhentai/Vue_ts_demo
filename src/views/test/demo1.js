@@ -74,9 +74,97 @@ var App = /** @class */ (function (_super) {
         notSure.ifItExists(); // okay, toFixed exists (but the compiler doesn't check)
         function keepWholeObject(wholeObject) {
             var a = wholeObject.a, _a = wholeObject.b, b = _a === void 0 ? 1001 : _a;
-            debugger;
         }
         keepWholeObject({ a: 'cmn' });
+        function f(_a) {
+            var _b = _a === void 0 ? { a: '123' } : _a, _c = _b.a, a = _c === void 0 ? '' : _c, _d = _b.b, b = _d === void 0 ? 0 : _d;
+            // ...
+        }
+        f({ a: 'aa' });
+        f({ b: 1 });
+        f({});
+        f();
+        function printLabel(labelledObj) {
+            // console.log(labelledObj.label);
+        }
+        var myObj = { size: 10, label: 'Size 10 Object' };
+        printLabel(myObj);
+        function createSquare(config) {
+            var newSquare = { color: 'white', area: 100 };
+            if (config.color) {
+                // Error: Property 'color' does not exist on type 'SquareConfig'
+                newSquare.color = config.color;
+            }
+            if (config.width) {
+                newSquare.area = config.width * config.width;
+            }
+            return newSquare;
+        }
+        var myS = { color: 'black', etc: 123, c: 123 };
+        var mySquare = createSquare(myS);
+        var mySearch;
+        mySearch = function (src, sub) {
+            var result = src.search(sub);
+            return result > -1;
+        };
+        mySearch('abc', 'b');
+        var myArray;
+        myArray = ["Bob", "Fred"];
+        var myStr = myArray[0];
+        var variable = 233;
+        var myAdd = function (x, y) { return variable + x + y; };
+        var _myAdd = function (x, y) { return variable + x + y; };
+        console.log(myAdd(1, 2));
+        console.log(_myAdd(1, 2));
+        function buildName(firstName) {
+            var restOfName = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                restOfName[_i - 1] = arguments[_i];
+            }
+            return firstName + " " + restOfName.join(" ");
+        }
+        var employeeName = buildName("Joseph", "Samuel", "Lucas", "MacKinzie");
+        var deck = {
+            suits: ["hearts", "spades", "clubs", "diamonds"],
+            cards: Array(52),
+            createCardPicker: function () {
+                var _this = this;
+                // NOTE: the line below is now an arrow function, allowing us to capture 'this' right here
+                return function () {
+                    var pickedCard = Math.floor(Math.random() * 52);
+                    var pickedSuit = Math.floor(pickedCard / 13);
+                    return { suit: _this.suits[pickedSuit], card: pickedCard % 13 };
+                };
+            }
+        };
+        var cardPicker = deck.createCardPicker();
+        var pickedCard = cardPicker();
+        var ui = /** @class */ (function () {
+            function ui() {
+                this.addClickListener = function (onclick) {
+                    var ee = new Event('click');
+                    onclick(ee);
+                };
+            }
+            return ui;
+        }());
+        var Handler = /** @class */ (function () {
+            function Handler() {
+                var _this = this;
+                this.onClickGood = function (e) {
+                    console.count('fuck');
+                    _this.info = e.type;
+                    console.log(_this.info);
+                };
+            }
+            return Handler;
+        }());
+        var h = new Handler();
+        var h1 = new Handler();
+        var uiElement = new ui();
+        console.log(uiElement);
+        uiElement.addClickListener(h.onClickGood);
+        uiElement.addClickListener(h1.onClickGood);
     };
     App = __decorate([
         Component
