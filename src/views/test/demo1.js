@@ -139,6 +139,14 @@ var App = /** @class */ (function (_super) {
         };
         var cardPicker = deck.createCardPicker();
         var pickedCard = cardPicker();
+        var cmn = function (a) { return a; };
+        function cmn1(a) {
+            return a;
+        }
+        var cmn2 = function (a) {
+            return a;
+        };
+        var cmn3 = function (b) { return b; };
         var ui = /** @class */ (function () {
             function ui() {
                 this.addClickListener = function (onclick) {
@@ -165,6 +173,53 @@ var App = /** @class */ (function (_super) {
         console.log(uiElement);
         uiElement.addClickListener(h.onClickGood);
         uiElement.addClickListener(h1.onClickGood);
+        var suits = ["hearts", "spades", "clubs", "diamonds"];
+        function pickCard(x) {
+            // Check to see if we're working with an object/array
+            // if so, they gave us the deck and we'll pick the card
+            if (typeof x == "object") {
+                return Math.floor(Math.random() * x.length);
+            }
+            if (typeof x == "number") {
+                var pickedSuit = Math.floor(x / 13);
+                return { suit: suits[pickedSuit], card: x % 13 };
+            }
+        }
+        var myDeck = [{ suit: "diamonds", card: 2 }, { suit: "spades", card: 10 }, { suit: "hearts", card: 4 }];
+        var pickedCard1 = myDeck[pickCard(myDeck)];
+        // alert("card: " + pickedCard1.card + " of " + pickedCard1.suit);
+        var pickedCard2 = pickCard(15);
+        // alert("card: " + pickedCard2.card + " of " + pickedCard2.suit);
+        function identity(arg) {
+            return arg;
+        }
+        console.log(identity('cmn'));
+        function loggingIdentity(arg) {
+            console.log(arg.length); // Array has a .length, so no more error
+            return arg;
+        }
+        var myIdentity = identity;
+        function loggingIdentity2(arg) {
+            console.log(arg.length); // Now we know it has a .length property, so no more error
+            return arg;
+        }
+        loggingIdentity2({ length: 10, value: 3 });
+        var ttt = { length: 10 };
+        function getProperty(obj, key) {
+            return obj[key];
+        }
+        var xxx = { name: 'cmn', length: 3 };
+        console.log(getProperty(xxx, 'name'));
+        function create(c) {
+            return new c();
+        }
+        var getSomeValue = function (num) { return num; };
+        var Response;
+        (function (Response) {
+            Response[Response["Yes"] = 0] = "Yes";
+            Response[Response["No"] = getSomeValue(1)] = "No";
+        })(Response || (Response = {}));
+        console.log(Response);
     };
     App = __decorate([
         Component
