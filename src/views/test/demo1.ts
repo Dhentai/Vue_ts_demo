@@ -262,6 +262,76 @@ export default class App extends Vue {
       No = getSomeValue(1)
     }
 
-    console.log(Response)
+    console.log(Response);
+
+    enum Direction {
+      shit = 123,
+      Up = "UP",
+      Down = "DOWN",
+      Left = "LEFt",
+      Right = "RIGHT",
+      tt = shit
+    }
+    console.log(Direction);
+
+    let num1 :number = 233;
+
+    enum E1 { X = Direction.shit, Y = 6, Z = num1}
+    console.log(E1);
+
+    // enum ShapeKind {
+    //   Circle,
+    //   Square,
+    // }
+    //
+    // interface Circle {
+    //   kind: ShapeKind.Circle;
+    //   radius: number;
+    // }
+    //
+    // interface Square {
+    //   kind: ShapeKind.Square;
+    //   sideLength: number;
+    // }
+
+    // let c: Circle = {
+    //   kind: ShapeKind.Square,
+    //   //    ~~~~~~~~~~~~~~~~ Error!
+    //   radius: 100,
+    // }
+    enum E {
+      Foo,
+      Bar
+    }
+    console.log(E);
+
+    let ee : E = 4;
+
+    // console.log(ee !== E.Foo || ee !== E.Bar)
+
+    // function ff(x: E) {
+    //   if (x !== E.Foo || x !== E.Bar) {
+    //     //             ~~~~~~~~~~~
+    //     // Error! Operator '!==' cannot be applied to types 'E.Foo' and 'E.Bar'.
+    //   }
+    // }
+    const enum Directions {
+      Up,
+      Down,
+      Left,
+      Right
+    }
+    // console.log(directions)
+    // let tttt : Directions.Up = 12
+    // let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right]
+
+
+    function sda(para: Function) {
+      let a = 1;
+      para()
+    }
+
+    sda((): void => console.log(1))
+
   }
 }

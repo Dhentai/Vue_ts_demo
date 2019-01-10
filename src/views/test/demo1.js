@@ -220,6 +220,58 @@ var App = /** @class */ (function (_super) {
             Response[Response["No"] = getSomeValue(1)] = "No";
         })(Response || (Response = {}));
         console.log(Response);
+        var Direction;
+        (function (Direction) {
+            Direction[Direction["shit"] = 123] = "shit";
+            Direction["Up"] = "UP";
+            Direction["Down"] = "DOWN";
+            Direction["Left"] = "LEFt";
+            Direction["Right"] = "RIGHT";
+            Direction[Direction["tt"] = 123] = "tt";
+        })(Direction || (Direction = {}));
+        console.log(Direction);
+        var num1 = 233;
+        var E1;
+        (function (E1) {
+            E1[E1["X"] = 123] = "X";
+            E1[E1["Y"] = 6] = "Y";
+            E1[E1["Z"] = num1] = "Z";
+        })(E1 || (E1 = {}));
+        console.log(E1);
+        // enum ShapeKind {
+        //   Circle,
+        //   Square,
+        // }
+        //
+        // interface Circle {
+        //   kind: ShapeKind.Circle;
+        //   radius: number;
+        // }
+        //
+        // interface Square {
+        //   kind: ShapeKind.Square;
+        //   sideLength: number;
+        // }
+        // let c: Circle = {
+        //   kind: ShapeKind.Square,
+        //   //    ~~~~~~~~~~~~~~~~ Error!
+        //   radius: 100,
+        // }
+        var E;
+        (function (E) {
+            E[E["Foo"] = 0] = "Foo";
+            E[E["Bar"] = 1] = "Bar";
+        })(E || (E = {}));
+        console.log(E);
+        var ee = 4;
+        // console.log(directions)
+        // let tttt : Directions.Up = 12
+        // let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right]
+        function sda(para) {
+            var a = 1;
+            para();
+        }
+        sda(function () { return console.log(1); });
     };
     App = __decorate([
         Component
