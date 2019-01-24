@@ -5,7 +5,7 @@ import App from './App.vue';
 import router from './router';
 Vue.config.productionTip = false;
 /* eslint-disable no-new */
-var vm = new Vue({
+var app = new Vue({
     el: '#app',
     router: router,
     components: { App: App },

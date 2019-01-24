@@ -109,7 +109,7 @@ var App = /** @class */ (function (_super) {
         };
         mySearch('abc', 'b');
         var myArray;
-        myArray = ["Bob", "Fred"];
+        myArray = ['Bob', 'Fred'];
         var myStr = myArray[0];
         var variable = 233;
         var myAdd = function (x, y) { return variable + x + y; };
@@ -121,11 +121,11 @@ var App = /** @class */ (function (_super) {
             for (var _i = 1; _i < arguments.length; _i++) {
                 restOfName[_i - 1] = arguments[_i];
             }
-            return firstName + " " + restOfName.join(" ");
+            return firstName + ' ' + restOfName.join(' ');
         }
-        var employeeName = buildName("Joseph", "Samuel", "Lucas", "MacKinzie");
+        var employeeName = buildName('Joseph', 'Samuel', 'Lucas', 'MacKinzie');
         var deck = {
-            suits: ["hearts", "spades", "clubs", "diamonds"],
+            suits: ['hearts', 'spades', 'clubs', 'diamonds'],
             cards: Array(52),
             createCardPicker: function () {
                 var _this = this;
@@ -147,14 +147,14 @@ var App = /** @class */ (function (_super) {
             return a;
         };
         var cmn3 = function (b) { return b; };
-        var ui = /** @class */ (function () {
-            function ui() {
+        var UI = /** @class */ (function () {
+            function UI() {
                 this.addClickListener = function (onclick) {
                     var ee = new Event('click');
                     onclick(ee);
                 };
             }
-            return ui;
+            return UI;
         }());
         var Handler = /** @class */ (function () {
             function Handler() {
@@ -169,23 +169,23 @@ var App = /** @class */ (function (_super) {
         }());
         var h = new Handler();
         var h1 = new Handler();
-        var uiElement = new ui();
+        var uiElement = new UI();
         console.log(uiElement);
         uiElement.addClickListener(h.onClickGood);
         uiElement.addClickListener(h1.onClickGood);
-        var suits = ["hearts", "spades", "clubs", "diamonds"];
+        var suits = ['hearts', 'spades', 'clubs', 'diamonds'];
         function pickCard(x) {
             // Check to see if we're working with an object/array
             // if so, they gave us the deck and we'll pick the card
-            if (typeof x == "object") {
+            if (typeof x === 'object') {
                 return Math.floor(Math.random() * x.length);
             }
-            if (typeof x == "number") {
+            if (typeof x === 'number') {
                 var pickedSuit = Math.floor(x / 13);
                 return { suit: suits[pickedSuit], card: x % 13 };
             }
         }
-        var myDeck = [{ suit: "diamonds", card: 2 }, { suit: "spades", card: 10 }, { suit: "hearts", card: 4 }];
+        var myDeck = [{ suit: 'diamonds', card: 2 }, { suit: 'spades', card: 10 }, { suit: 'hearts', card: 4 }];
         var pickedCard1 = myDeck[pickCard(myDeck)];
         // alert("card: " + pickedCard1.card + " of " + pickedCard1.suit);
         var pickedCard2 = pickCard(15);
@@ -206,6 +206,7 @@ var App = /** @class */ (function (_super) {
         loggingIdentity2({ length: 10, value: 3 });
         var ttt = { length: 10 };
         function getProperty(obj, key) {
+            // @ts-ignore
             return obj[key];
         }
         var xxx = { name: 'cmn', length: 3 };

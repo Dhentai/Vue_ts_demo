@@ -93,41 +93,39 @@ export default class App extends Vue {
     let myS: SquareConfig = { color: 'black', etc: 123, c: 123 };
     let mySquare = createSquare(myS);
 
-
     interface SearchFunc {
       (source: string, subString: string): boolean;
     }
     let mySearch: SearchFunc;
-    mySearch = function(src, sub): boolean {
+    mySearch = function (src, sub): boolean {
       let result = src.search(sub);
       return result > -1;
     };
 
     mySearch('abc', 'b');
 
-
     interface StringArray {
       [index: number]: string;
     }
 
     let myArray: StringArray;
-    myArray = ["Bob", "Fred"];
+    myArray = ['Bob', 'Fred'];
 
     let myStr: string = myArray[0];
     let variable: number = 233;
 
     let myAdd: (xx: number, yy: number) => number =
-      function(x, y): number { return variable + x + y; };
+      function (x, y): number { return variable + x + y; };
     let _myAdd = (x: number, y: number): number => variable + x + y;
 
     console.log(myAdd(1, 2));
     console.log(_myAdd(1, 2));
 
-    function buildName(firstName: string, ...restOfName: string[]) {
-      return firstName + " " + restOfName.join(" ");
+    function buildName (firstName: string, ...restOfName: string[]) {
+      return firstName + ' ' + restOfName.join(' ');
     }
 
-    let employeeName: string = buildName("Joseph", "Samuel", "Lucas", "MacKinzie");
+    let employeeName: string = buildName('Joseph', 'Samuel', 'Lucas', 'MacKinzie');
 
     interface Card {
       suit: string;
@@ -136,18 +134,18 @@ export default class App extends Vue {
     interface Deck {
       suits: string[];
       cards: number[];
-      createCardPicker(this: Deck): () => Card;
+      createCardPicker (this: Deck): () => Card;
     }
     let deck: Deck = {
-      suits: ["hearts", "spades", "clubs", "diamonds"],
+      suits: ['hearts', 'spades', 'clubs', 'diamonds'],
       cards: Array(52),
-      createCardPicker: function(this: Deck) {
+      createCardPicker: function (this: Deck) {
         // NOTE: the line below is now an arrow function, allowing us to capture 'this' right here
         return () => {
           let pickedCard = Math.floor(Math.random() * 52);
           let pickedSuit = Math.floor(pickedCard / 13);
 
-          return {suit: this.suits[pickedSuit], card: pickedCard % 13};
+          return { suit: this.suits[pickedSuit], card: pickedCard % 13 };
         }
       }
     };
@@ -155,8 +153,8 @@ export default class App extends Vue {
     let cardPicker = deck.createCardPicker();
     let pickedCard = cardPicker();
 
-    let cmn: (a: string) => string = (a) => { return a};
-    function cmn1(a: string): any {
+    let cmn: (a: string) => string = (a) => { return a };
+    function cmn1 (a: string): any {
       return a
     }
     let cmn2 = (a: string): any => {
@@ -165,9 +163,9 @@ export default class App extends Vue {
     let cmn3: (a: string) => string = (b) => b;
 
     interface UIElement {
-      addClickListener(onclick: (this: void, e: Event) => void): void;
+      addClickListener (onclick: (this: void, e: Event) => void): void;
     }
-    class ui implements UIElement{
+    class UI implements UIElement {
       addClickListener = (onclick: (this: void, e: Event) => void) => {
         let ee = new Event('click');
         onclick(ee)
@@ -175,7 +173,7 @@ export default class App extends Vue {
     }
 
     class Handler {
-      info: string;
+      info: string | undefined;
       onClickGood = (e: Event) => {
         console.count('fuck');
         this.info = e.type;
@@ -185,73 +183,73 @@ export default class App extends Vue {
 
     let h = new Handler();
     let h1 = new Handler();
-    let uiElement: UIElement = new ui();
+    let uiElement: UIElement = new UI();
     console.log(uiElement);
     uiElement.addClickListener(h.onClickGood);
     uiElement.addClickListener(h1.onClickGood);
 
+    let suits = ['hearts', 'spades', 'clubs', 'diamonds'];
 
-    let suits = ["hearts", "spades", "clubs", "diamonds"];
-
-    function pickCard(x: {suit: string; card: number; }[]): number;
-    function pickCard(x: number): {suit: string; card: number; };
-    function pickCard(x): any {
+    function pickCard (x: {suit: string; card: number; }[]): number;
+    function pickCard (x: number): {suit: string; card: number; };
+    function pickCard (x: any): any {
       // Check to see if we're working with an object/array
       // if so, they gave us the deck and we'll pick the card
-      if (typeof x == "object") {
+      if (typeof x === 'object') {
         return Math.floor(Math.random() * x.length);
       }
-      if (typeof x == "number") {
+      if (typeof x === 'number') {
         let pickedSuit = Math.floor(x / 13);
-        return {suit: suits[pickedSuit], card: x % 13};
+        return { suit: suits[pickedSuit], card: x % 13 };
       }
     }
 
-    let myDeck = [{ suit: "diamonds", card: 2 }, { suit: "spades", card: 10 }, { suit: "hearts", card: 4 }];
+    let myDeck = [{ suit: 'diamonds', card: 2 }, { suit: 'spades', card: 10 }, { suit: 'hearts', card: 4 }];
     let pickedCard1 = myDeck[pickCard(myDeck)];
     // alert("card: " + pickedCard1.card + " of " + pickedCard1.suit);
 
     let pickedCard2 = pickCard(15);
     // alert("card: " + pickedCard2.card + " of " + pickedCard2.suit);
 
-    function identity<T>(arg: T): T {
+    function identity<T> (arg: T): T {
       return arg;
     }
     console.log(identity<string>('cmn'));
 
-    function loggingIdentity<T>(arg: Array<T>): Array<T> {
+    function loggingIdentity<T> (arg: Array<T>): Array<T> {
       console.log(arg.length);  // Array has a .length, so no more error
       return arg;
     }
 
-    let myIdentity: { <T>(arg: T) : T } = identity;
+    let myIdentity: { <T>(arg: T): T } = identity;
 
     interface GenericIdentityFn {
-        <T>(arg: T): T;
+      <T>(arg: T): T;
     }
 
     interface Lengthwise {
       length: number;
     }
 
-    function loggingIdentity2<T extends Lengthwise>(arg: T): T {
+    function loggingIdentity2<T extends Lengthwise> (arg: T): T {
       console.log(arg.length);  // Now we know it has a .length property, so no more error
       return arg;
     }
-    loggingIdentity2({length: 10, value: 3});
+    loggingIdentity2({ length: 10, value: 3 });
 
-    let ttt: Lengthwise = {length: 10};
+    let ttt: Lengthwise = { length: 10 };
 
     interface T { name: string, length: number }
 
-    function getProperty(obj: T, key: string) {
+    function getProperty (obj: T, key: string) {
+      // @ts-ignore
       return obj[key];
     }
     let xxx = { name: 'cmn', length: 3 };
 
     console.log(getProperty(xxx, 'name'));
 
-    function create<T>(c: {new(): T; }): T {
+    function create<T> (c: {new(): T; }): T {
       return new c();
     }
 
@@ -266,15 +264,15 @@ export default class App extends Vue {
 
     enum Direction {
       shit = 123,
-      Up = "UP",
-      Down = "DOWN",
-      Left = "LEFt",
-      Right = "RIGHT",
+      Up = 'UP',
+      Down = 'DOWN',
+      Left = 'LEFt',
+      Right = 'RIGHT',
       tt = shit
     }
     console.log(Direction);
 
-    let num1 :number = 233;
+    let num1: number = 233;
 
     enum E1 { X = Direction.shit, Y = 6, Z = num1}
     console.log(E1);
@@ -305,7 +303,7 @@ export default class App extends Vue {
     }
     console.log(E);
 
-    let ee : E = 4;
+    let ee: E = 4;
 
     // console.log(ee !== E.Foo || ee !== E.Bar)
 
@@ -325,13 +323,11 @@ export default class App extends Vue {
     // let tttt : Directions.Up = 12
     // let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right]
 
-
-    function sda(para: Function) {
+    function sda (para: Function) {
       let a = 1;
       para()
     }
 
-    sda((): void => console.log(1))
-
+    sda((): void => console.log(1));
   }
 }

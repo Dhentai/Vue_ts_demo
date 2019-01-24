@@ -6,6 +6,7 @@
     "node_modules"
   ],
   "compilerOptions": {
+    "strict": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "allowJs": true,
@@ -13,7 +14,6 @@
     "target": "es5",
     "moduleResolution": "node",
     "noImplicitThis": true,
-//    "isolatedModules": true,
     "lib": [
       "dom",
       "es5",
