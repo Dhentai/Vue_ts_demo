@@ -25,77 +25,74 @@
           <p v-if="toggleShow">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
         </transition>
       </div>
+      <div class="wrapper">
+        <div>
+          <button @click="jsAnimate = !jsAnimate">
+            Toggle
+          </button>
+        </div>
+
+        <transition
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @leave="leave"
+          :css="false"
+        >
+          <p
+            class="content"
+            v-if="jsAnimate">
+            Demo
+          </p>
+        </transition>
+      </div>
+      <div
+        class="wrapper"
+        style="background-color: beige; height: 200px;overflow: auto;">
+        <div style="height: 500px"/>
+        <button @click="handleClick">Sample</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Velocity from 'velocity-animate'
 export default {
   name: 'Index',
   data () {
     return {
       show: true,
       showSlide: true,
-      toggleShow: true
+      toggleShow: true,
+      jsAnimate: true
+    }
+  },
+  methods: {
+    beforeEnter: function (el) {
+      el.style.opacity = 0
+      el.style.transformOrigin = 'left'
+    },
+    enter: function (el, done) {
+      Velocity(el, { opacity: 1, fontSize: '+=0.4em' }, { duration: 300 })
+      Velocity(el, { fontSize: '1em' }, { complete: done })
+    },
+    leave: function (el, done) {
+      Velocity(el, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 })
+      Velocity(el, { rotateZ: '100deg' }, { loop: 2 })
+      Velocity(el, {
+        rotateZ: '45deg',
+        translateY: '30px',
+        translateX: '30px',
+        opacity: 0
+      }, { complete: done })
+    },
+    handleClick () {
+      Velocity(document.activeElement, 'scroll')
     }
   }
 }
 </script>
 
-<style scoped>
-  .main-container{
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-  }
-  .wrapper{
-    margin: 20px 0;
-  }
-  .text{
-    width: 250px;
-    margin: 0 auto;
-    background-color: antiquewhite;
-  }
-  .fade-enter-active, .fade-leave-active {
-    transition: all .5s;
-  }
-  .fade-enter, .fade-leave-to{
-    width: 50px;
-    opacity: 0;
-  }
-  .fade-enter-to{
-    width: 500px;
-  }
-
-  /* 可以设置不同的进入和离开动画 */
-  /* 设置持续时间和动画函数 */
-  .slide-fade-enter-active {
-    transition: all .3s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-  .slide-fade-enter, .slide-fade-leave-to
-    /* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform: translateX(10px);
-    opacity: 0;
-  }
-
-  .bounce-enter-active {
-    animation: bounce-in .5s;
-  }
-  .bounce-leave-active {
-    animation: bounce-in .5s reverse;
-  }
-  @keyframes bounce-in {
-    0% {
-      transform: scale(0);
-    }
-    50% {
-      transform: scale(1.5);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
+<style lang="scss">
+  @import "./index.scss";
 </style>
